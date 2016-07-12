@@ -17,7 +17,7 @@ app.use('/api', require('../api/api.router'));
 
 app.use(session({
   // this mandatory configuration ensures that session IDs are not predictable
-  secret: 'tongiscool' // or whatever you like
+  secret: '!tongiscool' // or whatever you like
 }));
 
 app.use(function (req, res, next) {
@@ -26,10 +26,12 @@ app.use(function (req, res, next) {
 });
 
 app.post('/login', function (req, res, next) {
+  console.log('req.body*@***@*@&*&**&*&', req.body)
   User.findOne({
     where: req.body
   })
   .then(function (user) {
+    console.log('user#*$(&$(&#*&@(&',user)
     if (!user) {
       res.sendStatus(401);
     } else {
