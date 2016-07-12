@@ -21,31 +21,39 @@ app.use(session({
 }));
 
 app.use(function (req, res, next) {
-  console.log('session', req.session);
+
   next();
 });
 
 app.post('/login', function (req, res, next) {
-  console.log('req.body*@***@*@&*&**&*&', req.body)
   User.findOne({
     where: req.body
   })
   .then(function (user) {
-    console.log('user#*$(&$(&#*&@(&',user)
     if (!user) {
       res.sendStatus(401);
     } else {
       req.session.userId = user.id;
       res.sendStatus(204);
     }
-    console.log(req.session)
+
   })
   .catch(next);
 });
 
+app.post('/signup', function (req, res, next) {
+  User.create(req.body)
+  .then(function (user) {
+    res.status(201).json(user);
+  })
+
+  .catch(next);
+});
+
+
+
 app.use('/api', function (req, res, next) {
   if (!req.session.counter) req.session.counter = 0;
-  console.log('counter', ++req.session.counter);
   next();
 });
 

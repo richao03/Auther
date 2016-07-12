@@ -56,4 +56,13 @@ router.delete('/:id', function (req, res, next) {
   .catch(next);
 });
 
+// router.post('/signup', function (req, res, next) {
+//   User.create(req.body)
+//   .then(function (user) {
+//     res.status(201).json(user);
+//   })
+//   .catch(next);
+// });
+
+
 module.exports = router;
