@@ -1,12 +1,9 @@
 'use strict';
 
-app.controller('LoginCtrl', function($scope, $http, $stateParams) {
+app.controller('LoginCtrl', function($scope, LoginFactory) {
 
 
   $scope.submitLogin = function() {
-        $http.post('/login', {email: $scope.email, password: $scope.password})
-        .then(function() {
-          console.log('sent everything')
-        })
+        LoginFactory.submitLogin($scope.email, $scope.password)
       }
 })

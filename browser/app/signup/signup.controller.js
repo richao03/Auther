@@ -1,10 +1,6 @@
-app.controller('SignupCtrl', function($scope, $http, $state) {
+app.controller('SignupCtrl', function($scope, SignupFactory) {
 
   $scope.submitSignup = function() {
-    console.log("clicked")
-        $http.post('/signup', {email: $scope.email, password: $scope.password})
-        .then(function() {
-          $state.go('stories')
-        })
-      }
+    SignupFactory.submitSignup($scope.email, $scope.password);
+  }
 })
