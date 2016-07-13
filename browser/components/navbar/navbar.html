@@ -29,8 +29,8 @@
         <li ui-sref-active="active">
           <a ui-sref="login">login</a>
         </li>
-        <li>
-          <a ui-sref="logout"><button class="navbar-btn btn btn-default" ng-click="logout()">logout</button></a>
+        <li ng-controller="LogoutCtrl">
+          <a><button class="navbar-btn btn btn-default" ng-click="logout()">logout</button></a>
         </li>
       </ul>
     </div>

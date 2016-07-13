@@ -53,6 +53,13 @@ app.post('/signup', function (req, res, next) {
   .catch(next);
 });
 
+app.put('/logout', function(req, res, next) {
+  console.log("HELLOOOO!!")
+  console.log(req.session.userId)
+  req.session.userId = null;
+  console.log(req.session.userId)
+  res.sendStatus(200)
+})
 
 
 app.use('/api', function (req, res, next) {
