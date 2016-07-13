@@ -8,6 +8,11 @@ var User = require('../api/users/user.model');
 
 app.use(require('./logging.middleware'));
 
+app.use(session({
+  // this mandatory configuration ensures that session IDs are not predictable
+  secret: '!tongiscool' // or whatever you like
+}));
+
 app.use(require('./request-state.middleware'));
 
 app.use(require('./statics.middleware'));
@@ -15,13 +20,9 @@ app.use(require('./statics.middleware'));
 app.use('/api', require('../api/api.router'));
 
 
-app.use(session({
-  // this mandatory configuration ensures that session IDs are not predictable
-  secret: '!tongiscool' // or whatever you like
-}));
+
 
 app.use(function (req, res, next) {
-
   next();
 });
 
@@ -33,7 +34,9 @@ app.post('/login', function (req, res, next) {
     if (!user) {
       res.sendStatus(401);
     } else {
+
       req.session.userId = user.id;
+              console.log("***********************", req.session.userId)
       res.sendStatus(204);
     }
 
