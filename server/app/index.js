@@ -19,6 +19,8 @@ app.use(require('./statics.middleware'));
 
 app.use('/api', require('../api/api.router'));
 
+var value;
+
 
 
 
@@ -37,6 +39,7 @@ app.post('/login', function (req, res, next) {
 
       req.session.userId = user.id;
               console.log("***********************", req.session.userId)
+      value = user;
       res.sendStatus(204);
     }
 
@@ -58,7 +61,13 @@ app.put('/logout', function(req, res, next) {
   console.log(req.session.userId)
   req.session.userId = null;
   console.log(req.session.userId)
+  value = null;
   res.sendStatus(200)
+})
+
+app.get('/currentuser', function(req,res,next) {
+  console.log(value)
+  res.json(value)
 })
 
 
